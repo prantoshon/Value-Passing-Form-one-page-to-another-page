@@ -1,0 +1,44 @@
+      function Toggle()
+ {
+     var radio = document.getElementsByName('<%=rbtnCoronaInfo.ClientID %>');
+     var txt = document.getElementById('<%=txtwriteDetails.ClientID %>');
+        for (var j = 0; j < radio.length; j++)
+        {
+           if (radio[j].checked)
+           {
+                if(radio[j].value == 'Yes')
+                {
+                    txt.style.display = '';
+                    $("#txtwriteDetails").prop("disabled", false);
+                    $("#txtwriteDetails").focus();
+                }
+                else
+                {
+                    txt.style.display = 'none';
+                    
+                }
+            }
+        }
+ }
+ 
+ 
+ // call the function
+ 		<label>Any Symtom of Corona??
+                              <%--      <asp:TextBox ID="TextBox1" runat="server" ></asp:TextBox>--%>
+                                    <asp:RadioButtonList ID="rbtnCoronaInfo" runat="server" onclick="Toggle()">
+                                        <asp:ListItem>Yes</asp:ListItem>
+                                        <asp:ListItem>No</asp:ListItem>
+                                </asp:RadioButtonList>
+                                     </label>
+									 
+									 
+	// on form load
+
+  protected void Page_Load(object sender, EventArgs e)
+        {
+
+
+           
+            txtwriteDetails.Enabled = false;
+
+        }	
