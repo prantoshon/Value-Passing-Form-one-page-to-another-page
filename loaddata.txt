@@ -1,0 +1,50 @@
+//call it on form load 
+
+private void LoadData()
+        {
+            con.Open();
+            string qry = "SELECT     * FROM CoronaInfo  WHERE        (Dept = N'"+txtDepartment.Text+ "') AND (pin = N'"+ Pin + "')";
+            SqlCommand cmd = new SqlCommand(qry, con);
+            SqlDataReader sdr = cmd.ExecuteReader();
+            // string dept = 
+            if (sdr.Read())
+            {
+
+                txtAddress.Text = (sdr["PresentAddress"].ToString());
+                drpHouseType.SelectedItem.Text = (sdr["HouseType"].ToString());
+
+                string radio = (sdr["Coronasymptom"].ToString());
+                if (radio.Trim() =="1")
+                {
+                    rbtnCoronaInfo.Items[1].Selected = true;
+                }
+                 if (radio =="0")
+                {
+                    rbtnCoronaInfo.Items[0].Selected = true;
+                }
+                else
+                {
+                    rbtnCoronaInfo.Items[1].Selected = false;
+                    rbtnCoronaInfo.Items[0].Selected = false;
+                }
+
+                //Session["deptName"] = (sdr["Name"].ToString());
+                //Session["pin"] = (sdr["PIN"].ToString());
+                //Session["Name"] = (sdr["Name_of_Employee"].ToString());
+                //Session["permanentAddress"] = (sdr["Permanent_Address"].ToString());
+                //Server.Transfer("ContractForm.aspx");
+
+
+            }
+            else
+            {
+
+
+
+
+
+                //LblMessage.Text = "Login Fail......!!";
+
+            }
+            con.Close();
+        }
